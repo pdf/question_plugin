@@ -59,12 +59,13 @@ JS
   
   def view_issues_sidebar_issues_bottom(context = { })
     project = context[:project]
+	RAILS_DEFAULT_LOGGER.info "Issues context: #{context[:project]} => #{project}"
     if project
       question_count = Question.count(:conditions => ["#{Question.table_name}.assigned_to_id = ? AND #{Project.table_name}.id = ? AND #{Question.table_name}.opened = ?",
                                                       User.current,
                                                       project.id,
                                                       true],
-                                      :include => [:issue => [:project]])
+                                      :include => [{:issue => [:project]}])
     else
       question_count = Question.count(:conditions => {:assigned_to_id => User.current, :opened => true})
     end

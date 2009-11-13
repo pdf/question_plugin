@@ -1,6 +1,4 @@
-require_dependency 'issue'
-
-module QuestionIssuePatch
+module IssuePatch
   def self.included(base) # :nodoc:
     base.extend(ClassMethods)
 
@@ -92,5 +90,3 @@ module QuestionIssuePatch
     end
   end
 end
-
-Issue.send(:include, QuestionIssuePatch)

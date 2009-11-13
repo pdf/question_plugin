@@ -1,9 +1,30 @@
 require 'redmine'
 
-require 'question_journal_patch'
-require 'question_query_patch'
-require 'question_issue_patch'
-require 'question_queries_helper_patch'
+# Patches to the Redmine core.
+require 'dispatcher'
+
+Dispatcher.to_prepare :question_plugin do
+  require_dependency 'journal'
+  require_dependency 'query'
+  require_dependency 'issue'
+  require_dependency 'queries_helper'
+  # Guards against including the module multiple time (like in tests)
+  # and registering multiple callbacks
+  unless Journal.included_modules.include? QuestionPlugin::JournalPatch
+    Journal.send(:include, QuestionPlugin::JournalPatch)
+  end
+  unless Query.included_modules.include? QuestionPlugin::QueryPatch
+    Query.send(:include, QuestionPlugin::QueryPatch)
+  end
+  unless Issue.included_modules.include? QuestionPlugin::IssuePatch
+    Issue.send(:include, QuestionPlugin::IssuePatch)
+  end
+  unless QueriesHelper.included_modules.include? QuestionPlugin::QueriesHelperPatch
+    QueriesHelper.send(:include, QuestionPlugin::QueriesHelperPatch)
+  end
+end
+
+
 require 'question_issue_hooks'
 require 'question_layout_hooks'
 require 'question_journal_hooks'

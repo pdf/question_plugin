@@ -1,6 +1,4 @@
-require_dependency 'queries_helper'
-
-module QuestionQueriesHelperPatch
+module QueriesHelperPatch
   def self.included(base) # :nodoc:
     base.extend(ClassMethods)
 
@@ -52,5 +50,3 @@ module QuestionQueriesHelperPatch
     end
   end
 end
-
-QueriesHelper.send(:include, QuestionQueriesHelperPatch)
