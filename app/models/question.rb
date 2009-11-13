@@ -1,4 +1,6 @@
 class Question < ActiveRecord::Base
+  unloadable
+
   TruncateTo = 120
   
   belongs_to :assigned_to, :class_name => "User", :foreign_key => "assigned_to_id"
