@@ -3,7 +3,7 @@ class QuestionMailer < Mailer
     question = journal.question
     subject "[Question - #{question.issue.tracker.name} ##{question.issue.id}] #{question.issue.subject}"
     recipients question.assigned_to.mail unless question.assigned_to.nil?
-    @from  = "#{question.author.name} (Redmine) <#{Setting.mail_from}>" unless question.author.nil?
+    @from  = "#{question.author.name} (Redmine) <#{Setting.mail_from.to_s.gsub(/^[^<]*<([^>]+)>$/,'\1')}>" unless question.author.nil?
 
     body({
       :question => question,
@@ -20,7 +20,7 @@ class QuestionMailer < Mailer
   def answered_question(question, closing_journal)
     subject "[Answered - #{question.issue.tracker.name} ##{question.issue.id}] #{question.issue.subject}"
     recipients question.author.mail unless question.author.nil?
-    @from = "#{question.assigned_to.name} (Redmine) <#{Setting.mail_from}>" unless question.assigned_to.nil?
+    @from = "#{question.assigned_to.name} (Redmine) <#{Setting.mail_from.to_s.gsub(/^[^<]*<([^>]+)>$/,'\1')}>" unless question.assigned_to.nil?
 
     body({
       :question => question,
