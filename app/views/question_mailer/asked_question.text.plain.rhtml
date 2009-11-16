@@ -1,4 +1,5 @@
-<%= l(:text_question_asked) %> <%= h "##{@issue.id}" %> <%= @question.author %>
+<%= l(:text_question) %>
+<%= l(:question_text_asked_by) %> <%= h "#{@question.author} [#{@issue.tracker.name} ##{@issue.id}]" %>
 
 <%= @journal.notes if @journal.notes? %>
 

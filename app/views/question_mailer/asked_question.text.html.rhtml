@@ -1,4 +1,5 @@
-<%= l(:text_question_asked) %> <%= h "##{@issue.id}" %> <%= @question.author %>
+<h1><%= l(:text_question) %></h1>
+<i><%= l(:question_text_asked_by) %> <%= h "#{@question.author} [#{@issue.tracker.name} ##{@issue.id}]" %></i>
 
 <%= textilizable(@journal, :notes, :only_path => false) %>
 
