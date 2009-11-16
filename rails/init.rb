@@ -29,6 +29,9 @@ require 'question_issue_hooks'
 require 'question_layout_hooks'
 require 'question_journal_hooks'
 
+require_dependency 'journal_questions_observer'
+ActiveRecord::Base.observers << :journal_questions_observer
+
 Redmine::Plugin.register :question_plugin do
   name 'Redmine Question plugin'
   author 'Eric Davis'
@@ -40,5 +43,3 @@ Redmine::Plugin.register :question_plugin do
   requires_redmine :version_or_higher => '0.8.0'
 
 end
-
-ActiveRecord::Base.observers << :journal_questions_observer
