@@ -1,12 +1,12 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe QuestionIssuePatch do
+describe QuestionPlugin::IssuePatch do
   it 'should add a has_many association to Issue' do
     Issue.should have_association(:questions, :has_many)
   end
 end
 
-describe QuestionIssuePatch,"#pending_question?" do
+describe QuestionPlugin::IssuePatch,"#pending_question?" do
   before(:each) do
     @user = mock_model(User)
   end
@@ -58,7 +58,7 @@ describe QuestionIssuePatch,"#pending_question?" do
   end
 end
 
-describe QuestionIssuePatch,"#close_pending_questions" do
+describe QuestionPlugin::IssuePatch,"#close_pending_questions" do
   it 'should close any open questions for user' do
     @user = mock_model(User)
     @journal = mock_model(Journal)
